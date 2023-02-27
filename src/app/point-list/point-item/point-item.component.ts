@@ -1,4 +1,5 @@
 import {Component, Input} from "@angular/core";
+import {userComment} from "../model/userComment";
 
 @Component({
   selector:'app-point-item',
@@ -6,5 +7,5 @@ import {Component, Input} from "@angular/core";
   styleUrls:['./point-item.component.scss']
 })
 export class PointItemComponent{
-  @Input() inputText: string | undefined;
+  @Input() userComment: userComment;
 }

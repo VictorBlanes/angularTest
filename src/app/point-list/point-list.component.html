@@ -1,1 +1,37 @@
-<label>Hola :)</label>
+<div class="container">
+  <div class="row">
+    <form [formGroup]="userCommentFormGroup">
+      <div class="col-sm-3">
+        <label for="user" class="control-label" style="margin-top: 20px">Usuario</label>
+        <input
+          id="user"
+          class="form-control"
+          type="text"
+          style="margin-top: 20px; display: inline-block"
+          formControlName="userFormControl">
+      </div>
+      <div class="col-sm-6">
+        <label for="comment" class="control-label" style="margin-top: 20px">Comentario</label>
+        <input
+          id="comment"
+          class="form-control"
+          type="text"
+          style="margin-top: 20px; display: inline-block"
+          formControlName="userComment">
+      </div>
+      <div class="col-sm-3">
+        <button type="submit" class="btn btn-success" style="margin-top: 20px; display: inline-block" (click)="addItem()">Add Comment
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Contenido</h2>
+      <h4>Number of comments: {{this.numberOfComments}}</h4>
+    </div>
+  </div>
+  <ng-container *ngFor="let item of userComments">
+    <app-point-item [userComment]="item"></app-point-item>
+  </ng-container>
+</div>
