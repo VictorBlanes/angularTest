@@ -1,0 +1,17 @@
+button {
+  border: 1px solid black;
+  &:hover {
+    background-color:#D5DBDB;
+  }
+}
+
+.inputNumber {
+  width: 6em;
+  background-color: #F2F3F4;
+  border:1px solid black;
+  border-radius: 0px;
+}
+
+.heightPagination {
+  height: 1.75em;
+}

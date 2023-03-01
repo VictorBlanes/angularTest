@@ -6,20 +6,23 @@ import { AppComponent } from './app.component';
 import {PointListComponent} from "./point-list/point-list.component";
 import {PointItemComponent} from "./point-list/point-item/point-item.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {PaginationComponent} from "./shared/pagination/pagination.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     PointListComponent,
-    PointItemComponent
+    PointItemComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

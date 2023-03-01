@@ -31,7 +31,12 @@
       <h4>Number of comments: {{this.numberOfComments}}</h4>
     </div>
   </div>
-  <ng-container *ngFor="let item of userComments">
+  <ng-container *ngFor="let item of showedUserComments">
     <app-point-item [userComment]="item"></app-point-item>
   </ng-container>
+  <app-pagination
+    (newItemEvent)="this.changePage($event)"
+    [currentItems]="this.numberOfComments"
+    [itemsPerPage]="this.itemPerPage"
+    [currentPage]= "this.pageNumber"></app-pagination>
 </div>

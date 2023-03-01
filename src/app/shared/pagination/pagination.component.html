@@ -1,0 +1,13 @@
+<button class="heightPagination" (click)="firstPage()"><<</button>
+<button class="heightPagination" (click)="previousPage()"><</button>
+<form style="display:inline-block">
+  <input
+    type="number"
+    class="form-control heightPagination inputNumber"
+    min="1"
+    value="1"
+    max="{{maxPages() + 1}}"
+    (keyup.enter)="jumpToPage($event)">
+</form>
+<button class="heightPagination" (click)="nextPage()">></button>
+<button class="heightPagination" (click)="lastPage()">>></button>

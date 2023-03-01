@@ -11,7 +11,11 @@ import {DatePipe} from "@angular/common";
 export class PointListComponent implements OnInit {
   datepipe: DatePipe;
   numberOfComments: number = 0;
+  readonly itemPerPage: number = 10;
+  pageNumber: number = 0;
   userComments: userComment[];
+  showedUserComments: userComment[];
+
 
   userCommentFormGroup = new FormGroup({
     userFormControl: new FormControl('', [
@@ -44,6 +48,14 @@ export class PointListComponent implements OnInit {
       }
       this.userComments.push(userComment)
       this.numberOfComments = this.userComments.length;
+      this.changePage(this.pageNumber);
     }
+  }
+
+  changePage(currentPage: number) {
+    this.pageNumber = currentPage;
+    let lastComment: number = Math.min(this.userComments.length, (currentPage + 1) * this.itemPerPage);
+    this.showedUserComments = this.userComments.slice(currentPage * this.itemPerPage,
+      lastComment);
   }
 }
