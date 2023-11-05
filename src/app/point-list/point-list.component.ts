@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {userComment} from "./model/userComment";
 import {DatePipe} from "@angular/common";
+import {ServerRequestsService} from "../shared/server-requests.service";
 
 @Component({
   selector: 'app-point-list',
@@ -10,6 +11,8 @@ import {DatePipe} from "@angular/common";
 })
 export class PointListComponent implements OnInit {
   datepipe: DatePipe;
+  serverRequestService: ServerRequestsService;
+
   numberOfComments: number = 0;
   readonly itemPerPage: number = 10;
   pageNumber: number = 0;
@@ -30,29 +33,31 @@ export class PointListComponent implements OnInit {
     ])
   });
 
-  constructor(datePipe: DatePipe) {
+  constructor(datePipe: DatePipe, serverRequestService: ServerRequestsService) {
     this.datepipe = datePipe;
+    this.serverRequestService = serverRequestService;
   }
 
   ngOnInit() {
-    this.userComments = [];
+    this.serverRequestService.retrieveComments().subscribe(result => {this.userComments = result as userComment[]; this.changePage(this.pageNumber);});
   }
 
   addItem() {
     if (this.userCommentFormGroup.valid) {
       let currentDateTime = this.datepipe.transform((new Date), 'MM/dd/yyyy H:mm');
       let userComment: userComment = {
-        username: this.userCommentFormGroup.get('userFormControl').value,
-        comment: this.userCommentFormGroup.get('userComment').value,
-        commentDate: currentDateTime
+        userName: this.userCommentFormGroup.get('userFormControl').value,
+        message: this.userCommentFormGroup.get('userComment').value,
+        date: currentDateTime
       }
-      this.userComments.push(userComment)
-      this.numberOfComments = this.userComments.length;
+
+      this.serverRequestService.makeComment(userComment).subscribe(result => console.log(result));
       this.changePage(this.pageNumber);
     }
   }
 
   changePage(currentPage: number) {
+    this.numberOfComments = this.userComments.length;
     this.pageNumber = currentPage;
     let lastComment: number = Math.min(this.userComments.length, (currentPage + 1) * this.itemPerPage);
     this.showedUserComments = this.userComments.slice(currentPage * this.itemPerPage,

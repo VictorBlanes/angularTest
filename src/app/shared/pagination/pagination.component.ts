@@ -37,7 +37,6 @@ export class PaginationComponent {
   }
 
   maxPages(): number {
-    console.log(Math.floor((this.currentItems / this.itemsPerPage) - 0.001));
     return Math.floor((this.currentItems / this.itemsPerPage) - 0.001);
   }
 }
