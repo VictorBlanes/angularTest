@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {PaginationComponent} from "./shared/pagination/pagination.component";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {PaginationComponent} from "./shared/pagination/pagination.component";
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
